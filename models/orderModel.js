@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose";  // Used to control MongoDB
 
 const orderSchema = new mongoose.Schema(
   {
@@ -19,7 +19,7 @@ const orderSchema = new mongoose.Schema(
       enum: ["Not Process", "Processing", "Shipped", "deliverd", "cancel"],
     },
   },
-  { timestamps: true }
+  { timestamps: true }  // Automatically manage createdAt and updatedAt fields
 );
 
 export default mongoose.model("Order", orderSchema);

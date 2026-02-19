@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../styles/AuthStyles.css";
 const Register = () => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState(""); // Create state variables for each form field and function to update them
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
@@ -16,9 +16,9 @@ const Register = () => {
 
   // form function
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("/api/v1/auth/register", {
+    e.preventDefault(); // Stop the browser from reloading the page on form submission
+    try { // Need to check whether the user already has an account
+      const res = await axios.post("/api/v1/auth/register", { // Api call to register the user
         name,
         email,
         password,

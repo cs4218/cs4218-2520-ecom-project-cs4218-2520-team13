@@ -5,6 +5,7 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import '@testing-library/jest-dom/extend-expect';
 import toast from 'react-hot-toast';
 import Register from './Register';
+import { message } from 'antd';
 
 // Mocking axios.post
 jest.mock('axios');
@@ -31,7 +32,7 @@ jest.mock('../../context/search', () => ({
     writable: true,
   });
 
-window.matchMedia = window.matchMedia || function() {
+window.matchMedia = window.matchMedia || function() { // Check for responsive components CSS
     return {
       matches: false,
       addListener: function() {},
@@ -47,6 +48,35 @@ describe('Register Component', () => {
 
   it('should register the user successfully', async () => {
     axios.post.mockResolvedValueOnce({ data: { success: true } });
+    axios.get.mockResolvedValueOnce({ data: { category: [] } });
+
+    const { getByText, getByPlaceholderText } = render(   // getByText for buttons, getByPlaceholderText for input fields
+        <MemoryRouter initialEntries={['/register']}>
+          <Routes>
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </MemoryRouter>
+      );
+
+    // fireEvent.change to simulate user input
+    fireEvent.change(getByPlaceholderText('Enter Your Name'), { target: { value: 'John Doe' } });
+    fireEvent.change(getByPlaceholderText('Enter Your Email'), { target: { value: 'test@example.com' } });
+    fireEvent.change(getByPlaceholderText('Enter Your Password'), { target: { value: 'password123' } });
+    fireEvent.change(getByPlaceholderText('Enter Your Phone'), { target: { value: '1234567890' } });
+    fireEvent.change(getByPlaceholderText('Enter Your Address'), { target: { value: '123 Street' } });
+    fireEvent.change(getByPlaceholderText('Enter Your DOB'), { target: { value: '2000-01-01' } });
+    fireEvent.change(getByPlaceholderText('What is Your Favorite sports'), { target: { value: 'Football' } });
+
+    fireEvent.click(getByText('REGISTER'));
+
+    // Assertions to check if the axios.post was called and toast.success was shown
+    await waitFor(() => expect(axios.post).toHaveBeenCalled());
+    expect(toast.success).toHaveBeenCalledWith('Register Successfully, please login');
+  });
+
+  it('should display error message when success is false (else branch)', async () => {
+    axios.post.mockResolvedValueOnce({ data: { success: false, message: 'Email already registered' } });
+    axios.get.mockResolvedValueOnce({ data: { category: [] } });
 
     const { getByText, getByPlaceholderText } = render(
         <MemoryRouter initialEntries={['/register']}>
@@ -67,11 +97,12 @@ describe('Register Component', () => {
     fireEvent.click(getByText('REGISTER'));
 
     await waitFor(() => expect(axios.post).toHaveBeenCalled());
-    expect(toast.success).toHaveBeenCalledWith('Register Successfully, please login');
+    expect(toast.error).toHaveBeenCalledWith('Email already registered');
   });
 
   it('should display error message on failed registration', async () => {
     axios.post.mockRejectedValueOnce({ message: 'User already exists' });
+    axios.get.mockResolvedValueOnce({ data: { category: [] } });
 
     const { getByText, getByPlaceholderText } = render(
         <MemoryRouter initialEntries={['/register']}>

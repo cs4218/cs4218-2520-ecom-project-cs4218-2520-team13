@@ -4,13 +4,17 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/ProductDetailsStyles.css";
 
+// const Name = () => { ... } : Create a window
 const ProductDetails = () => {
   const params = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState({});
+  // const [變數, 設定變數的方法] = useState(初始值);
+  // {} 代表物件, [] 代表陣列
+  const [product, setProduct] = useState({});   // useState({}): Let the website remember the product details
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   //initalp details
+  // useEffect(函式, [依賴清單]);
   useEffect(() => {
     if (params?.slug) getProduct();
   }, [params?.slug]);
@@ -20,7 +24,7 @@ const ProductDetails = () => {
       const { data } = await axios.get(
         `/api/v1/product/get-product/${params.slug}`
       );
-      setProduct(data?.product);
+      setProduct(data?.product);  // Save product details to 'product' variable
       getSimilarProduct(data?.product._id, data?.product.category._id);
     } catch (error) {
       console.log(error);
@@ -62,7 +66,7 @@ const ProductDetails = () => {
             })}
           </h6>
           <h6>Category : {product?.category?.name}</h6>
-          <button class="btn btn-secondary ms-1">ADD TO CART</button>
+          <button className="btn btn-secondary ms-1">ADD TO CART</button>
         </div>
       </div>
       <hr />
