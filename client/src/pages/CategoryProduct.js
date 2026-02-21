@@ -7,7 +7,7 @@ const CategoryProduct = () => {
   const params = useParams();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState({});
 
   useEffect(() => {
     if (params?.slug) getProductsByCat();
@@ -55,7 +55,7 @@ const CategoryProduct = () => {
                     <div className="card-name-price">
                       <button
                         className="btn btn-info ms-1"
-                        onClick={() => navigate(`/product/${p.slug}`)}
+                        onClick={() => p.slug && navigate(`/product/${p.slug}`)}
                       >
                         More Details
                       </button>

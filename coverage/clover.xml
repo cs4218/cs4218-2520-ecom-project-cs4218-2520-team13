@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1771670076828" clover="3.2.0">
-  <project timestamp="1771670076829" name="All files">
-    <metrics statements="90" coveredstatements="89" conditionals="22" coveredconditionals="22" methods="27" coveredmethods="26" elements="139" coveredelements="137" complexity="0" loc="90" ncloc="90" packages="2" files="6" classes="6"/>
+<coverage generated="1771682758605" clover="3.2.0">
+  <project timestamp="1771682758605" name="All files">
+    <metrics statements="92" coveredstatements="91" conditionals="32" coveredconditionals="32" methods="27" coveredmethods="26" elements="151" coveredelements="149" complexity="0" loc="92" ncloc="92" packages="2" files="6" classes="6"/>
     <package name="pages">
-      <metrics statements="41" coveredstatements="41" conditionals="10" coveredconditionals="10" methods="13" coveredmethods="13"/>
+      <metrics statements="43" coveredstatements="43" conditionals="20" coveredconditionals="20" methods="13" coveredmethods="13"/>
       <file name="CategoryProduct.js" path="C:\Users\USER\Desktop\NUS exchange classes\CS4218 Software Testing\Project\cs4218-2520-ecom-project-cs4218-2520-team13\client\src\pages\CategoryProduct.js">
-        <metrics statements="16" coveredstatements="16" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="5"/>
+        <metrics statements="16" coveredstatements="16" conditionals="8" coveredconditionals="8" methods="5" coveredmethods="5"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="17" type="stmt"/>
         <line num="8" count="17" type="stmt"/>
@@ -21,7 +21,7 @@
         <line num="23" count="1" type="stmt"/>
         <line num="27" count="17" type="stmt"/>
         <line num="36" count="7" type="stmt"/>
-        <line num="58" count="1" type="stmt"/>
+        <line num="58" count="1" type="cond" truecount="2" falsecount="0"/>
       </file>
       <file name="Contact.js" path="C:\Users\USER\Desktop\NUS exchange classes\CS4218 Software Testing\Project\cs4218-2520-ecom-project-cs4218-2520-team13\client\src\pages\Contact.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
@@ -34,28 +34,30 @@
         <line num="5" count="3" type="stmt"/>
       </file>
       <file name="ProductDetails.js" path="C:\Users\USER\Desktop\NUS exchange classes\CS4218 Software Testing\Project\cs4218-2520-ecom-project-cs4218-2520-team13\client\src\pages\ProductDetails.js">
-        <metrics statements="21" coveredstatements="21" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
+        <metrics statements="23" coveredstatements="23" conditionals="12" coveredconditionals="12" methods="6" coveredmethods="6"/>
         <line num="8" count="1" type="stmt"/>
-        <line num="9" count="10" type="stmt"/>
-        <line num="10" count="10" type="stmt"/>
-        <line num="13" count="10" type="stmt"/>
-        <line num="14" count="10" type="stmt"/>
-        <line num="18" count="10" type="stmt"/>
-        <line num="19" count="6" type="cond" truecount="2" falsecount="0"/>
-        <line num="22" count="10" type="stmt"/>
-        <line num="23" count="5" type="stmt"/>
-        <line num="24" count="5" type="stmt"/>
-        <line num="27" count="4" type="stmt"/>
-        <line num="28" count="4" type="stmt"/>
-        <line num="30" count="1" type="stmt"/>
-        <line num="34" count="10" type="stmt"/>
-        <line num="35" count="4" type="stmt"/>
-        <line num="36" count="4" type="stmt"/>
-        <line num="39" count="3" type="stmt"/>
-        <line num="41" count="1" type="stmt"/>
-        <line num="44" count="10" type="stmt"/>
-        <line num="80" count="2" type="stmt"/>
-        <line num="102" count="1" type="stmt"/>
+        <line num="9" count="30" type="stmt"/>
+        <line num="10" count="30" type="stmt"/>
+        <line num="13" count="30" type="stmt"/>
+        <line num="14" count="30" type="stmt"/>
+        <line num="18" count="30" type="stmt"/>
+        <line num="19" count="17" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="30" type="stmt"/>
+        <line num="23" count="16" type="stmt"/>
+        <line num="24" count="16" type="stmt"/>
+        <line num="27" count="15" type="stmt"/>
+        <line num="28" count="15" type="stmt"/>
+        <line num="29" count="15" type="cond" truecount="4" falsecount="0"/>
+        <line num="30" count="10" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="37" count="30" type="stmt"/>
+        <line num="38" count="10" type="stmt"/>
+        <line num="39" count="10" type="stmt"/>
+        <line num="42" count="9" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="47" count="30" type="stmt"/>
+        <line num="85" count="8" type="stmt"/>
+        <line num="107" count="2" type="cond" truecount="2" falsecount="0"/>
       </file>
     </package>
     <package name="pages.Auth">
