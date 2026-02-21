@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -168,36 +168,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">17x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -273,9 +273,9 @@ const CategoryProduct = () =&gt; {
   const [category, setCategory] = useState([]);
 &nbsp;
   useEffect(() =&gt; {
-    if (params?.slug) getPrductsByCat();
+    if (params?.slug) getProductsByCat();
   }, [params?.slug]);
-  const getPrductsByCat = async () =&gt; {
+  const getProductsByCat = async () =&gt; {
     try {
       const { data } = await axios.get(
         `/api/v1/product/product-category/${params.slug}`
@@ -290,8 +290,8 @@ const CategoryProduct = () =&gt; {
   return (
     &lt;Layout&gt;
       &lt;div className="container mt-3 category"&gt;
-        &lt;h4 className="text-center"&gt;Category - {category?.name}&lt;/h4&gt;
-        &lt;h6 className="text-center"&gt;{products?.length} result found &lt;/h6&gt;
+        &lt;h4 className="text-center"&gt;{category?.name ? `Category - ${category.name}` : "Category"}&lt;/h4&gt;
+        &lt;h6 className="text-center"&gt;{products?.length || 0} result found &lt;/h6&gt;
         &lt;div className="row"&gt;
           &lt;div className="col-md-9 offset-1"&gt;
             &lt;div className="d-flex flex-wrap"&gt;
@@ -306,14 +306,14 @@ const CategoryProduct = () =&gt; {
                     &lt;div className="card-name-price"&gt;
                       &lt;h5 className="card-title"&gt;{p.name}&lt;/h5&gt;
                       &lt;h5 className="card-title card-price"&gt;
-                        {p.price.toLocaleString("en-US", {
+                        {p.price?.toLocaleString("en-US", {
                           style: "currency",
                           currency: "USD",
                         })}
                       &lt;/h5&gt;
                     &lt;/div&gt;
                     &lt;p className="card-text "&gt;
-                      {p.description.substring(0, 60)}...
+                      {p.description?.substring(0, 60)}...
                     &lt;/p&gt;
                     &lt;div className="card-name-price"&gt;
                       &lt;button
@@ -367,7 +367,7 @@ export default CategoryProduct;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-02-17T07:32:39.392Z
+                at 2026-02-21T10:01:33.899Z
             </div>
         <script src="../prettify.js"></script>
         <script>
