@@ -1,5 +1,5 @@
 import React from "react";
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Contact from './Contact';
 import { MemoryRouter } from 'react-router-dom';
@@ -38,6 +38,14 @@ describe('Contact Page Unit Tests', () => {
             </MemoryRouter>
         );
     };
+
+    it('should display the correct document title via Layout', async () => {
+        renderSetup();
+        // Verifying if Layout prop 'title' correctly updates document title
+        await waitFor(() => {
+            expect(document.title).toBe("Contact us");
+        });
+    });
 
     it('should render the contact page heading and description', () => {
         // Act
