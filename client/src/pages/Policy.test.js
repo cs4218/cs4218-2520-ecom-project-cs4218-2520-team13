@@ -1,6 +1,6 @@
 import React from "react";
 import '@testing-library/jest-dom/extend-expect';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Policy from './Policy';
 
@@ -30,6 +30,16 @@ describe('Policy Page Unit Tests', () => {
             </MemoryRouter>
         );
     };
+
+    it("should set the document title via Layout component", async () => {
+        // Act
+        renderSetup();
+
+        // Assert - Verifying if the Helmet title is set correctly
+        await waitFor(() => {
+            expect(document.title).toBe("Privacy Policy");
+        });
+    });
 
     it("should render the policy image", () => {
         // Act

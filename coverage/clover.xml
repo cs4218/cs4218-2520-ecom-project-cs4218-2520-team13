@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1771668093930" clover="3.2.0">
-  <project timestamp="1771668093931" name="All files">
+<coverage generated="1771668998600" clover="3.2.0">
+  <project timestamp="1771668998600" name="All files">
     <metrics statements="90" coveredstatements="89" conditionals="22" coveredconditionals="22" methods="27" coveredmethods="26" elements="139" coveredelements="137" complexity="0" loc="90" ncloc="90" packages="2" files="6" classes="6"/>
     <package name="pages">
       <metrics statements="41" coveredstatements="41" conditionals="10" coveredconditionals="10" methods="13" coveredmethods="13"/>
@@ -31,7 +31,7 @@
       <file name="Policy.js" path="C:\Users\USER\Desktop\NUS exchange classes\CS4218 Software Testing\Project\cs4218-2520-ecom-project-cs4218-2520-team13\client\src\pages\Policy.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="4" count="1" type="stmt"/>
-        <line num="5" count="2" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
       </file>
       <file name="ProductDetails.js" path="C:\Users\USER\Desktop\NUS exchange classes\CS4218 Software Testing\Project\cs4218-2520-ecom-project-cs4218-2520-team13\client\src\pages\ProductDetails.js">
         <metrics statements="21" coveredstatements="21" conditionals="4" coveredconditionals="4" methods="6" coveredmethods="6"/>
