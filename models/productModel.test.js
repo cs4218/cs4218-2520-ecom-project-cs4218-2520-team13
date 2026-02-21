@@ -107,7 +107,7 @@ describe('Product Model Unit Tests', () => {
     });
 
     // 5. OPTIONAL FIELDS TESTING
-    it('should pass validation when optional fields like shipping are missing', async () => {
+    it('should pass validation when optional fields like photo and shipping are missing', async () => {
         const productData = getValidProductData();
         delete productData.shipping; // Optional field
         delete productData.photo;   // Optional field

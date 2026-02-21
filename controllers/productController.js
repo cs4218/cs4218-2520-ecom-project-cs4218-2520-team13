@@ -72,8 +72,8 @@ export const getProductController = async (req, res) => {
       .sort({ createdAt: -1 }); // sort by creation date descending (newest first)
     res.status(200).send({ // package response object and send to frontend
       success: true,
-      counTotal: products.length,
-      message: "ALlProducts ",
+      countTotal: products.length,
+      message: "AllProducts",
       products,
     });
   } catch (error) {
@@ -103,7 +103,7 @@ export const getSingleProductController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "Error while getting single product",
-      error: error.message, // Didnt write error.message before
+      error: error.message, 
     });
   }
 };
@@ -112,9 +112,23 @@ export const getSingleProductController = async (req, res) => {
 export const productPhotoController = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.pid).select("photo");
-    if (product.photo.data) {
+    // Handle "Product Not Found" (Prevents Null Pointer Crash)
+    if (!product) {
+      return res.status(404).send({
+        success: false,
+        message: "Product not found",
+      });
+    }
+    // Handle "No Photo Data" (Prevents Request Hanging)
+    if (product.photo && product.photo.data) {
       res.set("Content-type", product.photo.contentType);
       return res.status(200).send(product.photo.data);
+    } else {
+      // Return 404 or a default image if photo doesn't exist
+      return res.status(404).send({
+        success: false,
+        message: "No photo found for this product",
+      });
     }
   } catch (error) {
     console.log(error);
@@ -198,8 +212,8 @@ export const productFiltersController = async (req, res) => {
   try {
     const { checked, radio } = req.body;
     let args = {};
-    if (checked.length > 0) args.category = checked;
-    if (radio.length) args.price = { $gte: radio[0], $lte: radio[1] };
+    if (checked && checked.length > 0) args.category = checked;
+    if (radio && radio.length === 2) args.price = { $gte: radio[0], $lte: radio[1] };
     const products = await productModel.find(args);
     res.status(200).send({
       success: true,
@@ -218,14 +232,14 @@ export const productFiltersController = async (req, res) => {
 // product count
 export const productCountController = async (req, res) => {
   try {
-    const total = await productModel.find({}).estimatedDocumentCount();
+    const total = await productModel.estimatedDocumentCount();
     res.status(200).send({
       success: true,
       total,
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send({
+    res.status(500).send({
       message: "Error in product count",
       error: error.message,
       success: false,
@@ -237,7 +251,9 @@ export const productCountController = async (req, res) => {
 export const productListController = async (req, res) => {
   try {
     const perPage = 6;
-    const page = req.params.page ? req.params.page : 1;
+    // Explicitly parse and validate the page number
+    const pageNum = parseInt(req.params.page) || 1;
+    const page = pageNum < 1 ? 1 : pageNum;
     const products = await productModel
       .find({})
       .select("-photo")
@@ -250,7 +266,7 @@ export const productListController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send({
+    res.status(500).send({
       success: false,
       message: "error in per page ctrl",
       error: error.message,
@@ -262,6 +278,13 @@ export const productListController = async (req, res) => {
 export const searchProductController = async (req, res) => {
   try {
     const { keyword } = req.params;
+    if (!keyword || keyword.trim() === "") {
+      return res.status(400).send({
+        success: false,
+        message: "Keyword is required",
+      });
+    }
+
     const results = await productModel
       .find({
         $or: [
@@ -277,7 +300,7 @@ export const searchProductController = async (req, res) => {
     //res.json(resutls);
   } catch (error) {
     console.log(error);
-    res.status(400).send({
+    res.status(500).send({
       success: false,
       message: "Error In Search Product API",
       error: error.message,
@@ -286,9 +309,16 @@ export const searchProductController = async (req, res) => {
 };
 
 // similar products
-export const realtedProductController = async (req, res) => {
+export const relatedProductController = async (req, res) => {
   try {
     const { pid, cid } = req.params;
+    if (!pid || !cid) {
+      return res.status(400).send({
+        success: false,
+        message: "Product ID and Category ID are required",
+      });
+    }
+
     const products = await productModel
       .find({
         category: cid,
@@ -303,9 +333,9 @@ export const realtedProductController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send({
+    res.status(500).send({
       success: false,
-      message: "error while geting related product",
+      message: "error while getting related product",
       error: error.message,
     });
   }
@@ -314,7 +344,18 @@ export const realtedProductController = async (req, res) => {
 // get prdocyst by catgory
 export const productCategoryController = async (req, res) => {
   try {
-    const category = await categoryModel.findOne({ slug: req.params.slug });
+    const { slug } = req.params;
+    if (!slug) {
+      return res.status(400).send({ success: false, message: "Slug is required" });
+    }
+
+    const category = await categoryModel.findOne({ slug });
+    if (!category) {
+      return res.status(404).send({
+        success: false,
+        message: "Category not found in database",
+      });
+    }
     const products = await productModel.find({ category }).populate("category");
     res.status(200).send({
       success: true, 
@@ -323,7 +364,7 @@ export const productCategoryController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(400).send({
+    res.status(500).send({
       success: false,
       error: error.message,
       message: "Error While Getting products",
