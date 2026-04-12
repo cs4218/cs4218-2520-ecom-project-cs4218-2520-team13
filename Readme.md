@@ -34,7 +34,7 @@
 | Member | Tests (pts) |
 |--------|------------|
 | **Wei Sheng** | Security Tests (tests/security) — JWT auth validation, authorization controls (IDOR, admin isolation, mass assignment, business logic), NoSQL injection resistance, sensitive data exposure, error sanitization, CORS & security headers |
-| **Priyansh**  | |
+| **Priyansh**  | Soak Tests (tests/soak) — Mixed workload soak testing over extended duration, covering browsing, search, auth, cart, category, and product flows. Screenshots of test runs available in `tests/soak/output_screenshots/`. Claude Agents (`.claude/agents/`) — `selector-finder`: extracts Playwright-compatible selectors from React components for UI testing; `playwright-test-reviewer`: reviews Playwright test files for best practices, flaky test patterns, and quality issues |
 | **LOU YING WEN**  | Load Tests (tests/load) — k6 mixed-load scenarios (Browsing, Search, Checkout), daily workload simulation, performance bottleneck identification, latency optimization (Server-side & HTTP caching), and stress-resilient flow design |
 | **Yik Seng**  | Spike Tests (tests/spike) - flash sale browsing, login surge, search surge, checkout flow, category promotion, full mixed-archetype scenario |
 | **Aashim** | Stress Tests (tests/stress) - Product listing, Product search, Product filters, Product photo, auth login, auth register, category listing, order retrieval, paginated listing, mixed workload |
